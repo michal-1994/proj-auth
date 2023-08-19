@@ -1,1 +1,23 @@
-<p>header works!</p>
+<header class="header">
+    <div class="container">
+        <div class="row">
+            <div class="header-logo">Logo</div>
+            <nav class="header-nav">
+                <ul>
+                    <li>
+                        <a routerLink="/">Home</a>
+                    </li>
+                    <li>
+                        <a routerLink="/sign-in">Sign in</a>
+                    </li>
+                    <li>
+                        <a routerLink="/sign-up">Sign up</a>
+                    </li>
+                    <li>
+                        <button (click)="logout()">Sign out</button>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
