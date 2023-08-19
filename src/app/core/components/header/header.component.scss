@@ -27,6 +27,7 @@
                     color: $text-color;
                     opacity: 0.85;
                     transition: all linear 0.1s;
+                    font-size: 1rem;
 
                     &:hover {
                         opacity: 1;
@@ -35,12 +36,12 @@
                 }
 
                 button {
-                    border: 1px solid $text-color;
+                    font-size: 1rem;
+                    border: none;
                     color: $text-color;
                     border-radius: $border-radius;
-                    background-color: none;
-                    background: none;
-                    padding: 0.4rem;
+                    background-color: $warn-color;
+                    padding: 0.5rem 0.65rem;
                     opacity: 0.85;
                     transition: all linear 0.1s;
 
