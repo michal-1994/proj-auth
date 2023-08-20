@@ -7,15 +7,18 @@ import { HomeComponent } from './home/pages/home/home.component';
 const routes: Routes = [
     {
         path: '',
-        component: HomeComponent
+        component: HomeComponent,
+        data: { title: 'Home' }
     },
     {
         path: 'login',
-        component: LoginComponent
+        component: LoginComponent,
+        data: { title: 'Login' }
     },
     {
         path: 'sign-up',
-        component: SignUpComponent
+        component: SignUpComponent,
+        data: { title: 'Sign Up' }
     }
 ];
 
