@@ -1,23 +1,49 @@
-<header class="header">
-    <div class="container">
-        <div class="row">
-            <h1 class="header-logo">Logo</h1>
-            <nav class="header-nav">
-                <ul>
-                    <li>
-                        <a routerLink="/">Home</a>
+<header class="bg-primary">
+    <div class="container mx-auto">
+        <nav
+            class="flex flex-wrap items-center justify-between w-full py-4 md:py-0 px-4">
+            <div>
+                <a routerLink="/">
+                    <h1>LOGO</h1>
+                </a>
+            </div>
+
+            <button
+                (click)="toggleMenu()"
+                class="cursor-pointer md:hidden block">
+                MENU
+            </button>
+
+            <div
+                *ngIf="menuVisible"
+                class="w-full md:flex md:items-center md:w-auto">
+                <ul
+                    class="py-2 mt-4 text-base md:flex md:justify-between md:mt-0">
+                    <li class="md:mx-8">
+                        <a
+                            routerLink="/login"
+                            (click)="toggleMenu()"
+                            class="py-2 my-2 block text-light100 hover:text-light duration-300"
+                            >Login</a
+                        >
                     </li>
-                    <li>
-                        <a routerLink="/login">Login</a>
+                    <li class="md:mx-8">
+                        <a
+                            routerLink="/sign-up"
+                            (click)="toggleMenu()"
+                            class="py-2 my-2 block text-light100 hover:text-light duration-300"
+                            >Sign up</a
+                        >
                     </li>
-                    <li>
-                        <a routerLink="/sign-up">Sign up</a>
-                    </li>
-                    <li>
-                        <button (click)="logout()">Logout</button>
+                    <li class="md:mx-8 flex justify-end">
+                        <button
+                            (click)="logout(); toggleMenu()"
+                            class="py-2 my-2 block rounded-lg px-4 py-2 bg-warn text-dark hover:bg-warn100 duration-300">
+                            Logout
+                        </button>
                     </li>
                 </ul>
-            </nav>
-        </div>
+            </div>
+        </nav>
     </div>
 </header>
