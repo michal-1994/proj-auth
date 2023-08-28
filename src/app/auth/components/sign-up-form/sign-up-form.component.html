@@ -1,0 +1,68 @@
+<div class="w-full max-w-xs mx-auto">
+    <form
+        [formGroup]="signupForm"
+        class="bg-light shadow-md rounded px-8 pt-8 pb-10 mb-4">
+        <h3 class="text-accent font-bold my-2">Create your account</h3>
+
+        <div class="mb-4">
+            <label class="block text-accent text-sm font-bold mb-2" for="email">
+                Email
+            </label>
+            <input
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-accent leading-tight focus:outline-none focus:shadow-outline"
+                type="email"
+                id="email"
+                placeholder="Email"
+                autocomplete="off"
+                formControlName="email"
+                required />
+        </div>
+
+        <div class="mb-6">
+            <label
+                class="block text-accent text-sm font-bold mb-2"
+                for="password">
+                Password
+            </label>
+            <input
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-accent leading-tight focus:outline-none focus:shadow-outline"
+                type="password"
+                id="password"
+                placeholder="Password"
+                autocomplete="off"
+                formControlName="password"
+                required />
+        </div>
+
+        <div class="mb-6">
+            <label
+                class="block text-accent text-sm font-bold mb-2"
+                for="passwordConfirmation">
+                Confirm password
+            </label>
+            <input
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-accent leading-tight focus:outline-none focus:shadow-outline"
+                type="password"
+                id="passwordConfirmation"
+                placeholder="Confirm password"
+                autocomplete="off"
+                formControlName="passwordConfirmation"
+                required />
+        </div>
+
+        <div class="flex items-center justify-between">
+            <button
+                class="bg-primary hover:bg-primary100 text-light font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline cursor-pointer"
+                type="submit"
+                (click)="signup()"
+                [disabled]="!signupForm.valid">
+                Sign up
+            </button>
+            <a
+                class="inline-block align-baseline font-bold text-sm text-primary hover:text-primary100 cursor-pointer"
+                routerLink="/login"
+                >Login</a
+            >
+        </div>
+    </form>
+</div>
