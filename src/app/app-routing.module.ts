@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './auth/pages/login/login.component';
 import { SignUpComponent } from './auth/pages/sign-up/sign-up.component';
+import { DashboardComponent } from './dashboard/pages/dashboard/dashboard.component';
 import { HomeComponent } from './home/pages/home/home.component';
 
 const routes: Routes = [
@@ -9,6 +10,11 @@ const routes: Routes = [
         path: '',
         component: HomeComponent,
         data: { title: 'Home' }
+    },
+    {
+        path: 'dashboard',
+        component: DashboardComponent,
+        data: { title: 'Dashboard' }
     },
     {
         path: 'login',
