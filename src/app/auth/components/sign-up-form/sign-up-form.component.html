@@ -19,8 +19,8 @@
             <div
                 *ngIf="email?.invalid && (email?.dirty || email?.touched)"
                 class="text-warn900 pt-2 text-xs">
-                <p *ngIf="email?.errors?.['required']">Email jest wymagany.</p>
-                <p *ngIf="email?.errors?.['email']">Email jest niepoprawny.</p>
+                <p *ngIf="email?.errors?.['required']">Email is required.</p>
+                <p *ngIf="email?.errors?.['email']">Email is invalid.</p>
             </div>
         </div>
 
@@ -37,14 +37,18 @@
                 placeholder="Password"
                 autocomplete="off"
                 formControlName="password"
-                required />
+                required
+                minlength="6" />
             <div
                 *ngIf="
                     password?.invalid && (password?.dirty || password?.touched)
                 "
                 class="text-warn900 pt-2 text-xs">
                 <p *ngIf="password?.errors?.['required']">
-                    Hasło jest wymagane.
+                    Password is required.
+                </p>
+                <p *ngIf="password?.errors?.['minlength']">
+                    The password must contain at least 6 characters.
                 </p>
             </div>
         </div>
@@ -71,14 +75,14 @@
                 "
                 class="text-warn900 pt-2 text-xs">
                 <p *ngIf="passwordConfirmation?.errors?.['required']">
-                    Potwierdzenie hasła jest wymagane.
+                    Password confirmation is required.
                 </p>
             </div>
         </div>
 
         <div class="flex items-center justify-between">
             <button
-                class="bg-primary hover:bg-primary100 text-light font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline cursor-pointer disabled:opacity-75 opacity-100 disabled:hover:bg-primary"
+                class="bg-primary hover:bg-primary100 text-light font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline cursor-pointer disabled:opacity-75 opacity-100 disabled:hover:bg-primary focus-within:ring-2 focus-within:ring-dark"
                 type="submit"
                 (click)="signup()"
                 [disabled]="!signupForm.valid">

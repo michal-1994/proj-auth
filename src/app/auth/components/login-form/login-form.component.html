@@ -19,8 +19,8 @@
             <div
                 *ngIf="email?.invalid && (email?.dirty || email?.touched)"
                 class="text-warn900 pt-2 text-xs">
-                <p *ngIf="email?.errors?.['required']">Email jest wymagany.</p>
-                <p *ngIf="email?.errors?.['email']">Email jest niepoprawny.</p>
+                <p *ngIf="email?.errors?.['required']">Email is required.</p>
+                <p *ngIf="email?.errors?.['email']">Email is invalid.</p>
             </div>
         </div>
 
@@ -44,14 +44,14 @@
                 "
                 class="text-warn900 pt-2 text-xs">
                 <p *ngIf="password?.errors?.['required']">
-                    Hasło jest wymagane.
+                    Password is required.
                 </p>
             </div>
         </div>
 
         <div class="flex items-center justify-between">
             <button
-                class="bg-primary hover:bg-primary100 text-light font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline cursor-pointer disabled:opacity-75 disabled:hover:bg-primary opacity-100"
+                class="bg-primary hover:bg-primary100 text-light font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline cursor-pointer disabled:opacity-75 disabled:hover:bg-primary opacity-100 focus-within:ring-2 focus-within:ring-dark"
                 type="submit"
                 (click)="login()"
                 [disabled]="!loginForm.valid">

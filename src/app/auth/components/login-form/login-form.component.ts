@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
@@ -17,8 +17,11 @@ export class LoginFormComponent implements OnInit {
 
     ngOnInit() {
         this.loginForm = this.formBuilder.group({
-            email: ['', Validators.email],
-            password: ['']
+            email: new FormControl(null, {
+                validators: Validators.email,
+                updateOn: 'blur'
+            }),
+            password: new FormControl(null)
         });
     }
 
