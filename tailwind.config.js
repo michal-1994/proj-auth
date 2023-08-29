@@ -9,6 +9,7 @@ module.exports = {
                 accent: '#191919',
                 warn: '#ffc107',
                 warn100: '#d39e00',
+                warn900: '#dd2222',
                 light: '#ffffff',
                 light100: '#efefef',
                 dark: '#000000',

@@ -16,6 +16,12 @@
                 autocomplete="off"
                 formControlName="email"
                 required />
+            <div
+                *ngIf="email?.invalid && (email?.dirty || email?.touched)"
+                class="text-warn900 pt-2 text-xs">
+                <p *ngIf="email?.errors?.['required']">Email jest wymagany.</p>
+                <p *ngIf="email?.errors?.['email']">Email jest niepoprawny.</p>
+            </div>
         </div>
 
         <div class="mb-6">
@@ -32,6 +38,15 @@
                 autocomplete="off"
                 formControlName="password"
                 required />
+            <div
+                *ngIf="
+                    password?.invalid && (password?.dirty || password?.touched)
+                "
+                class="text-warn900 pt-2 text-xs">
+                <p *ngIf="password?.errors?.['required']">
+                    Hasło jest wymagane.
+                </p>
+            </div>
         </div>
 
         <div class="mb-6">
@@ -48,11 +63,22 @@
                 autocomplete="off"
                 formControlName="passwordConfirmation"
                 required />
+            <div
+                *ngIf="
+                    passwordConfirmation?.invalid &&
+                    (passwordConfirmation?.dirty ||
+                        passwordConfirmation?.touched)
+                "
+                class="text-warn900 pt-2 text-xs">
+                <p *ngIf="passwordConfirmation?.errors?.['required']">
+                    Potwierdzenie hasła jest wymagane.
+                </p>
+            </div>
         </div>
 
         <div class="flex items-center justify-between">
             <button
-                class="bg-primary hover:bg-primary100 text-light font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline cursor-pointer"
+                class="bg-primary hover:bg-primary100 text-light font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline cursor-pointer disabled:opacity-75 opacity-100 disabled:hover:bg-primary"
                 type="submit"
                 (click)="signup()"
                 [disabled]="!signupForm.valid">

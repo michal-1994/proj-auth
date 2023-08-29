@@ -23,5 +23,28 @@ export class SignUpFormComponent implements OnInit {
         });
     }
 
-    signup() {}
+    get email() {
+        return this.signupForm.get('email');
+    }
+
+    get password() {
+        return this.signupForm.get('password');
+    }
+
+    get passwordConfirmation() {
+        return this.signupForm.get('passwordConfirmation');
+    }
+
+    get f() {
+        return this.signupForm.controls;
+    }
+
+    signup() {
+        const signupRequest = {
+            email: this.f['email'].value,
+            password: this.f['password'].value
+        };
+
+        console.log(signupRequest);
+    }
 }

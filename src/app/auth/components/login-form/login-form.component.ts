@@ -22,5 +22,24 @@ export class LoginFormComponent implements OnInit {
         });
     }
 
-    login() {}
+    get email() {
+        return this.loginForm.get('email');
+    }
+
+    get password() {
+        return this.loginForm.get('password');
+    }
+
+    get f() {
+        return this.loginForm.controls;
+    }
+
+    login() {
+        const loginRequest = {
+            email: this.f['email'].value,
+            password: this.f['password'].value
+        };
+
+        console.log(loginRequest);
+    }
 }
