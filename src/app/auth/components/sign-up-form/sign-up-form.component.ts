@@ -25,8 +25,7 @@ export class SignUpFormComponent implements OnInit {
         this.signupForm = this.formBuilder.group(
             {
                 email: new FormControl(null, {
-                    validators: Validators.email,
-                    updateOn: 'blur'
+                    validators: Validators.email
                 }),
                 password: new FormControl(null, {
                     validators: [
@@ -43,8 +42,7 @@ export class SignUpFormComponent implements OnInit {
                             /[!@#$%^&*()_+{}\[\]:;<>,.?~]/,
                             { hasSpecialCharacters: true }
                         )
-                    ],
-                    updateOn: 'blur'
+                    ]
                 }),
                 passwordConfirmation: new FormControl(null)
             },
