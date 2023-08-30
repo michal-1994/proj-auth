@@ -29,6 +29,21 @@ export class SignUpFormComponent implements OnInit {
                     updateOn: 'blur'
                 }),
                 password: new FormControl(null, {
+                    validators: [
+                        CustomValidators.patternValidator(/\d/, {
+                            hasNumber: true
+                        }),
+                        CustomValidators.patternValidator(/[A-Z]/, {
+                            hasCapitalCase: true
+                        }),
+                        CustomValidators.patternValidator(/[a-z]/, {
+                            hasSmallCase: true
+                        }),
+                        CustomValidators.patternValidator(
+                            /[!@#$%^&*()_+{}\[\]:;<>,.?~]/,
+                            { hasSpecialCharacters: true }
+                        )
+                    ],
                     updateOn: 'blur'
                 }),
                 passwordConfirmation: new FormControl(null)

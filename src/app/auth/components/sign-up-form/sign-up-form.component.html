@@ -48,7 +48,19 @@
                     Password is required.
                 </p>
                 <p *ngIf="password?.errors?.['minlength']">
-                    The password must contain at least 6 characters.
+                    Password must contain at least 6 characters.
+                </p>
+                <p *ngIf="password?.errors?.['hasNumber']">
+                    Password must contain at least one number.
+                </p>
+                <p *ngIf="password?.errors?.['hasCapitalCase']">
+                    Password must contain at least one capital letter.
+                </p>
+                <p *ngIf="password?.errors?.['hasSmallCase']">
+                    Password must contain at least one small letter.
+                </p>
+                <p *ngIf="password?.errors?.['hasSpecialCharacters']">
+                    Password must contain at least one special character.
                 </p>
             </div>
         </div>
@@ -78,7 +90,7 @@
                     Password confirmation is required.
                 </p>
                 <p *ngIf="passwordConfirmation?.errors?.['noPassswordMatch']">
-                    The passwords are not the same
+                    Passwords are not the same.
                 </p>
             </div>
         </div>
