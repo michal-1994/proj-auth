@@ -42,7 +42,10 @@
                 <button
                     (click)="togglePasswordVisibility()"
                     type="button"
-                    class="appearance-none px-2 pt-2 text-accent opacity-80">
+                    class="appearance-none px-2 pt-2 text-accent opacity-80"
+                    [attr.alt]="
+                        isPasswordVisible ? 'Hide password' : 'Show password'
+                    ">
                     <span class="material-symbols-outlined">
                         {{
                             isPasswordVisible ? 'visibility' : 'visibility_off'
