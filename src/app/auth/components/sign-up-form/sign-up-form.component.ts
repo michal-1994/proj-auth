@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+    FormBuilder,
+    FormControl,
+    FormGroup,
+    Validators
+} from '@angular/forms';
 import { Router } from '@angular/router';
+import { CustomValidators } from '../../validators/custom-validators';
 
 @Component({
     selector: 'app-sign-up-form',
@@ -16,16 +22,21 @@ export class SignUpFormComponent implements OnInit {
     ) {}
 
     ngOnInit() {
-        this.signupForm = this.formBuilder.group({
-            email: new FormControl(null, {
-                validators: Validators.email,
-                updateOn: 'blur'
-            }),
-            password: new FormControl(null, {
-                updateOn: 'blur'
-            }),
-            passwordConfirmation: new FormControl(null)
-        });
+        this.signupForm = this.formBuilder.group(
+            {
+                email: new FormControl(null, {
+                    validators: Validators.email,
+                    updateOn: 'blur'
+                }),
+                password: new FormControl(null, {
+                    updateOn: 'blur'
+                }),
+                passwordConfirmation: new FormControl(null)
+            },
+            {
+                validator: CustomValidators.passwordMatchValidator
+            }
+        );
     }
 
     get email() {

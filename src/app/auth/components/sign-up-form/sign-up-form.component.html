@@ -77,6 +77,9 @@
                 <p *ngIf="passwordConfirmation?.errors?.['required']">
                     Password confirmation is required.
                 </p>
+                <p *ngIf="passwordConfirmation?.errors?.['noPassswordMatch']">
+                    The passwords are not the same
+                </p>
             </div>
         </div>
 
