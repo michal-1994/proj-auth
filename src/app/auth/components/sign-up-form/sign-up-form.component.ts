@@ -15,6 +15,8 @@ import { CustomValidators } from '../../validators/custom-validators';
 })
 export class SignUpFormComponent implements OnInit {
     signupForm!: FormGroup;
+    isPasswordVisible: boolean = false;
+    isPasswordConfirmationVisible: boolean = false;
 
     constructor(
         private formBuilder: FormBuilder,
@@ -75,5 +77,14 @@ export class SignUpFormComponent implements OnInit {
         };
 
         console.log(signupRequest);
+    }
+
+    togglePasswordVisibility() {
+        this.isPasswordVisible = !this.isPasswordVisible;
+    }
+
+    togglePasswordConfirmationVisibility() {
+        this.isPasswordConfirmationVisible =
+            !this.isPasswordConfirmationVisible;
     }
 }

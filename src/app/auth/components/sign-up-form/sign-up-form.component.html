@@ -30,15 +30,26 @@
                 for="password">
                 Password
             </label>
-            <input
-                class="shadow appearance-none border rounded w-full py-2 px-3 text-accent leading-tight focus:outline-none focus:shadow-outline"
-                type="password"
-                id="password"
-                placeholder="Password"
-                autocomplete="off"
-                formControlName="password"
-                required
-                minlength="6" />
+            <div class="flex items-center">
+                <input
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-accent leading-tight focus:outline-none focus:shadow-outline"
+                    type="{{ isPasswordVisible ? 'text' : 'password' }}"
+                    id="password"
+                    placeholder="Password"
+                    autocomplete="off"
+                    formControlName="password"
+                    required
+                    minlength="6" />
+                <button
+                    (click)="togglePasswordVisibility()"
+                    class="appearance-none px-2 pt-2 text-accent opacity-80">
+                    <span class="material-symbols-outlined">
+                        {{
+                            isPasswordVisible ? 'visibility' : 'visibility_off'
+                        }}
+                    </span>
+                </button>
+            </div>
             <div
                 *ngIf="
                     password?.invalid && (password?.dirty || password?.touched)
@@ -71,14 +82,29 @@
                 for="passwordConfirmation">
                 Confirm password
             </label>
-            <input
-                class="shadow appearance-none border rounded w-full py-2 px-3 text-accent leading-tight focus:outline-none focus:shadow-outline"
-                type="password"
-                id="passwordConfirmation"
-                placeholder="Confirm password"
-                autocomplete="off"
-                formControlName="passwordConfirmation"
-                required />
+            <div class="flex items-center">
+                <input
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-accent leading-tight focus:outline-none focus:shadow-outline"
+                    type="{{
+                        isPasswordConfirmationVisible ? 'text' : 'password'
+                    }}"
+                    id="passwordConfirmation"
+                    placeholder="Confirm password"
+                    autocomplete="off"
+                    formControlName="passwordConfirmation"
+                    required />
+                <button
+                    (click)="togglePasswordConfirmationVisibility()"
+                    class="appearance-none px-2 pt-2 text-accent opacity-80">
+                    <span class="material-symbols-outlined">
+                        {{
+                            isPasswordConfirmationVisible
+                                ? 'visibility'
+                                : 'visibility_off'
+                        }}
+                    </span>
+                </button>
+            </div>
             <div
                 *ngIf="
                     passwordConfirmation?.invalid &&

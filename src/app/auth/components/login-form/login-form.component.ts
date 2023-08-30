@@ -14,6 +14,7 @@ import { Router } from '@angular/router';
 })
 export class LoginFormComponent implements OnInit {
     loginForm!: FormGroup;
+    isPasswordVisible: boolean = false;
 
     constructor(
         private formBuilder: FormBuilder,
@@ -48,5 +49,9 @@ export class LoginFormComponent implements OnInit {
         };
 
         console.log(loginRequest);
+    }
+
+    togglePasswordVisibility() {
+        this.isPasswordVisible = !this.isPasswordVisible;
     }
 }
