@@ -43,3 +43,6 @@ Thumbs.db
 
 .vscode
 .angular
+
+/api
+proxy.conf.json

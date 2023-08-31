@@ -6,6 +6,7 @@ import {
     Validators
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 import { CustomValidators } from '../../validators/custom-validators';
 
 @Component({
@@ -20,7 +21,8 @@ export class SignUpFormComponent implements OnInit {
 
     constructor(
         private formBuilder: FormBuilder,
-        private router: Router
+        private router: Router,
+        private readonly service: AuthService
     ) {}
 
     ngOnInit() {
@@ -71,12 +73,16 @@ export class SignUpFormComponent implements OnInit {
     }
 
     signup() {
-        const signupRequest = {
-            email: this.f['email'].value,
-            password: this.f['password'].value
-        };
-
-        console.log(signupRequest);
+        this.service
+            .signup({
+                email: this.f['email'].value,
+                password: this.f['password'].value
+            })
+            .subscribe(() => {
+                // TODO: User added confirmation and redirect
+                console.log('User added!');
+                this.signupForm.reset();
+            });
     }
 
     togglePasswordVisibility() {
