@@ -3,15 +3,13 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from '../models/user.model';
-import { environment } from 'src/environments/environment';
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthService {
     public readonly LOGIN_PATH = '/login';
-    public readonly CONFIRM_PATH = '/confirm';
-    public readonly INITIAL_PATH = '/app/dashboard';
+    public readonly INITIAL_PATH = '/dashboard';
 
     constructor(
         private router: Router,
