@@ -8,6 +8,7 @@ import {
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { CustomValidators } from '../../validators/custom-validators';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'app-sign-up-form',
@@ -22,7 +23,8 @@ export class SignUpFormComponent implements OnInit {
     constructor(
         private formBuilder: FormBuilder,
         private router: Router,
-        private readonly service: AuthService
+        private readonly service: AuthService,
+        private toastr: ToastrService
     ) {}
 
     ngOnInit() {
@@ -78,10 +80,16 @@ export class SignUpFormComponent implements OnInit {
                 email: this.f['email'].value,
                 password: this.f['password'].value
             })
-            .subscribe(() => {
-                // TODO: User added confirmation and redirect
-                console.log('User added!');
-                this.signupForm.reset();
+            .subscribe({
+                next: () => {
+                    this.toastr.success('User added successfully.', 'Success');
+
+                    this.signupForm.reset();
+                    this.router.navigate(['login']);
+                },
+                error: e => {
+                    this.toastr.error('Something went wrong.', 'Error');
+                }
             });
     }
 
