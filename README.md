@@ -54,6 +54,6 @@ Add file `/api/routes.json`
 }
 ```
 
-## Api server
+## Api server (only for testing)
 
 Run `npm run api` for a api server. Navigate to `http://localhost:3000/`. You need to restart the application to reload if you change any of the source files.
