@@ -82,13 +82,19 @@ export class SignUpFormComponent implements OnInit {
             })
             .subscribe({
                 next: () => {
-                    this.toastr.success('User added successfully.', 'Success');
+                    this.toastr.success('User added successfully', 'Success');
 
                     this.signupForm.reset();
                     this.router.navigate(['login']);
                 },
                 error: e => {
-                    this.toastr.error('Something went wrong.', 'Error');
+                    let errorMessage = 'Something went wrong';
+
+                    if (e.error) {
+                        errorMessage = e.error;
+                    }
+
+                    this.toastr.error(errorMessage, 'Error');
                 }
             });
     }

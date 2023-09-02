@@ -6,6 +6,8 @@ import {
     Validators
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
     selector: 'app-login-form',
@@ -18,7 +20,9 @@ export class LoginFormComponent implements OnInit {
 
     constructor(
         private formBuilder: FormBuilder,
-        private router: Router
+        private router: Router,
+        private readonly service: AuthService,
+        private toastr: ToastrService
     ) {}
 
     ngOnInit() {
@@ -43,12 +47,28 @@ export class LoginFormComponent implements OnInit {
     }
 
     login() {
-        const loginRequest = {
-            email: this.f['email'].value,
-            password: this.f['password'].value
-        };
+        this.service
+            .login({
+                email: this.f['email'].value,
+                password: this.f['password'].value
+            })
+            .subscribe({
+                next: () => {
+                    this.toastr.success('Successfully logged in', 'Success');
 
-        console.log(loginRequest);
+                    this.loginForm.reset();
+                    this.router.navigate(['dashboard']);
+                },
+                error: e => {
+                    let errorMessage = 'Something went wrong';
+
+                    if (e.error) {
+                        errorMessage = e.error;
+                    }
+
+                    this.toastr.error(errorMessage, 'Error');
+                }
+            });
     }
 
     togglePasswordVisibility() {

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { User } from '../models/user.model';
 
 @Injectable({
@@ -9,11 +9,13 @@ import { User } from '../models/user.model';
 export class AuthService {
     constructor(private http: HttpClient) {}
 
-    signup(user: User): Observable<void> {
-        return this.http.post<any>(`/api/users`, user);
+    signup(user: User): Observable<any> {
+        return this.http.post<any>(`/api/register`, user);
     }
 
-    login() {}
+    login(user: User): Observable<any> {
+        return this.http.post<any>(`/api/login`, user);
+    }
 
     logout() {}
 }
