@@ -7,15 +7,27 @@ import { User } from '../models/user.model';
     providedIn: 'root'
 })
 export class AuthService {
+    private userLogged!: User | null;
+
     constructor(private http: HttpClient) {}
 
-    signup(user: User): Observable<any> {
+    signup(user: User): Observable<User> {
         return this.http.post<any>(`/api/register`, user);
     }
 
-    login(user: User): Observable<any> {
-        return this.http.post<any>(`/api/login`, user);
+    login(user: User): Observable<User> {
+        return this.http
+            .post<any>(`/api/login`, user)
+            .pipe(tap(data => this.setUserLogged(data)));
     }
 
     logout() {}
+
+    setUserLogged(user: User) {
+        this.userLogged = user;
+    }
+
+    setUserLogout() {
+        this.userLogged = null;
+    }
 }
