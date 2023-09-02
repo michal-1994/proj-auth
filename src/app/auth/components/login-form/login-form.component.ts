@@ -19,10 +19,10 @@ export class LoginFormComponent implements OnInit {
     isPasswordVisible: boolean = false;
 
     constructor(
-        private formBuilder: FormBuilder,
-        private router: Router,
+        private readonly formBuilder: FormBuilder,
+        private readonly router: Router,
         private readonly service: AuthService,
-        private toastr: ToastrService
+        private readonly toastr: ToastrService
     ) {}
 
     ngOnInit() {

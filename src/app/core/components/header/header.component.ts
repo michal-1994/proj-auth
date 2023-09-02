@@ -1,4 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/auth/services/auth.service';
 
 @Component({
     selector: 'app-header',
@@ -13,12 +14,14 @@ export class HeaderComponent implements OnInit {
         this.setInitialMenuVisibility();
     }
 
+    constructor(readonly authService: AuthService) {}
+
     ngOnInit(): void {
         this.setInitialMenuVisibility();
     }
 
     logout() {
-        console.log('logout');
+        this.authService.logout();
     }
 
     toggleMenu() {
