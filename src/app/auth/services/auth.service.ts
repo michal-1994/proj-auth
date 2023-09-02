@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 import { User } from '../models/user.model';
+import { Router } from '@angular/router';
 
 @Injectable({
     providedIn: 'root'
@@ -11,7 +12,10 @@ export class AuthService {
 
     userLogged!: User | null;
 
-    constructor(private http: HttpClient) {}
+    constructor(
+        private readonly http: HttpClient,
+        private readonly router: Router
+    ) {}
 
     signup(user: User): Observable<any> {
         return this.http.post<any>(`/api/register`, user);
@@ -25,6 +29,7 @@ export class AuthService {
 
     logout() {
         this.setUserLogout();
+        this.router.navigate(['/']);
     }
 
     setUserLogged(user: any) {
