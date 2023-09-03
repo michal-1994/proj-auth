@@ -5,8 +5,6 @@ import {
     FormGroup,
     Validators
 } from '@angular/forms';
-import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
 
@@ -16,15 +14,13 @@ import { AuthService } from '../../services/auth.service';
     styleUrls: ['./login-form.component.scss']
 })
 export class LoginFormComponent implements OnInit, OnDestroy {
-    sub = new Subscription();
+    subscription = new Subscription();
     loginForm!: FormGroup;
     isPasswordVisible: boolean = false;
 
     constructor(
         private readonly formBuilder: FormBuilder,
-        private readonly router: Router,
-        private readonly service: AuthService,
-        private readonly toastr: ToastrService
+        private readonly authService: AuthService
     ) {}
 
     ngOnInit() {
@@ -49,7 +45,7 @@ export class LoginFormComponent implements OnInit, OnDestroy {
     }
 
     login() {
-        this.sub = this.service
+        this.subscription = this.authService
             .login({
                 email: this.f['email'].value,
                 password: this.f['password'].value
@@ -62,6 +58,6 @@ export class LoginFormComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        this.sub.unsubscribe();
+        this.subscription.unsubscribe();
     }
 }

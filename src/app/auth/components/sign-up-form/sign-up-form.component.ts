@@ -1,30 +1,28 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import {
     FormBuilder,
     FormControl,
     FormGroup,
     Validators
 } from '@angular/forms';
-import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { CustomValidators } from '../../validators/custom-validators';
-import { ToastrService } from 'ngx-toastr';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'app-sign-up-form',
     templateUrl: './sign-up-form.component.html',
     styleUrls: ['./sign-up-form.component.scss']
 })
-export class SignUpFormComponent implements OnInit {
+export class SignUpFormComponent implements OnInit, OnDestroy {
+    subscription = new Subscription();
     signupForm!: FormGroup;
     isPasswordVisible: boolean = false;
     isPasswordConfirmationVisible: boolean = false;
 
     constructor(
         private readonly formBuilder: FormBuilder,
-        private readonly router: Router,
-        private readonly service: AuthService,
-        private readonly toastr: ToastrService
+        private readonly authService: AuthService
     ) {}
 
     ngOnInit() {
@@ -75,28 +73,12 @@ export class SignUpFormComponent implements OnInit {
     }
 
     signup() {
-        this.service
+        this.subscription = this.authService
             .signup({
                 email: this.f['email'].value,
                 password: this.f['password'].value
             })
-            .subscribe({
-                next: () => {
-                    this.toastr.success('User added successfully', 'Success');
-
-                    this.signupForm.reset();
-                    this.router.navigate(['login']);
-                },
-                error: e => {
-                    let errorMessage = 'Something went wrong';
-
-                    if (e.error) {
-                        errorMessage = e.error;
-                    }
-
-                    this.toastr.error(errorMessage, 'Error');
-                }
-            });
+            .subscribe();
     }
 
     togglePasswordVisibility() {
@@ -106,5 +88,9 @@ export class SignUpFormComponent implements OnInit {
     togglePasswordConfirmationVisibility() {
         this.isPasswordConfirmationVisible =
             !this.isPasswordConfirmationVisible;
+    }
+
+    ngOnDestroy() {
+        this.subscription.unsubscribe();
     }
 }

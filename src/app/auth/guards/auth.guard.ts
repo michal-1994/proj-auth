@@ -12,10 +12,10 @@ export class AuthGuard {
     isAuth: boolean = false;
 
     constructor(
-        private service: AuthService,
+        private authService: AuthService,
         private router: Router
     ) {
-        this.service.isAuth$.subscribe(isAuth => {
+        this.authService.isAuth$.subscribe(isAuth => {
             this.isAuth = isAuth;
         });
     }

@@ -33,7 +33,25 @@ export class AuthService {
     }
 
     signup(user: User): Observable<any> {
-        return this.http.post<any>(`/api/register`, user);
+        return this.http.post<any>(`/api/register`, user).pipe(
+            tap(() => {
+                this.toastrService.success(
+                    'User added successfully',
+                    'Success'
+                );
+                this.router.navigate(['login']);
+            }),
+            catchError((e: any) => {
+                let errorMessage = 'Something went wrong';
+
+                if (e.error) {
+                    errorMessage = e.error;
+                }
+
+                this.toastrService.error(errorMessage, 'Error');
+                return errorMessage;
+            })
+        );
     }
 
     login(user: User): Observable<any> {
