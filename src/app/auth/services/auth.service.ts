@@ -48,6 +48,10 @@ export class AuthService {
                     errorMessage = e.error;
                 }
 
+                if (e.status == 404) {
+                    errorMessage = 'Something went wrong';
+                }
+
                 this.toastrService.error(errorMessage, 'Error');
                 return errorMessage;
             })
