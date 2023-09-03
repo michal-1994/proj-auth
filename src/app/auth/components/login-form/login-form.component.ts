@@ -57,7 +57,7 @@ export class LoginFormComponent implements OnInit {
                     this.toastr.success('Successfully logged in', 'Success');
 
                     this.loginForm.reset();
-                    this.router.navigate(['dashboard']);
+                    this.router.navigate(['app/dashboard']);
                 },
                 error: e => {
                     let errorMessage = 'Something went wrong';

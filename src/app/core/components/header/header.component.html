@@ -21,7 +21,7 @@
                     class="py-2 mt-4 text-base md:flex md:justify-between md:mt-0">
                     <li *ngIf="authService.userLogged" class="md:mx-8">
                         <a
-                            routerLink="/dashboard"
+                            routerLink="/app/dashboard"
                             (click)="toggleMenu()"
                             class="py-2 my-2 block text-light100 hover:text-light duration-300"
                             >Dashboard</a
@@ -43,7 +43,7 @@
                             >Sign up</a
                         >
                     </li>
-                    <li class="md:mx-8 flex justify-end">
+                    <li *ngIf="authService.userLogged" class="md:mx-8 flex justify-end">
                         <button
                             (click)="logout(); toggleMenu()"
                             class="py-2 my-2 block rounded-lg px-4 py-2 bg-warn text-dark hover:bg-warn100 duration-300">
