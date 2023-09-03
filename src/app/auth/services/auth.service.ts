@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, tap } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { User } from '../models/user.model';
 import { Router } from '@angular/router';
 
@@ -10,35 +10,43 @@ import { Router } from '@angular/router';
 export class AuthService {
     private readonly JWT_TOKEN = 'JWT_TOKEN';
 
-    userLogged!: User | null;
+    private isAuthSubject = new BehaviorSubject<boolean>(false);
+
+    isAuth$ = this.isAuthSubject.asObservable();
 
     constructor(
         private readonly http: HttpClient,
         private readonly router: Router
-    ) {}
+    ) {
+        this.checkAuthentication();
+    }
+
+    private checkAuthentication() {
+        const token = localStorage.getItem(this.JWT_TOKEN);
+        if (token) {
+            this.isAuthSubject.next(true);
+        } else {
+            this.isAuthSubject.next(false);
+        }
+    }
 
     signup(user: User): Observable<any> {
         return this.http.post<any>(`/api/register`, user);
     }
 
     login(user: User): Observable<any> {
-        return this.http
-            .post<any>(`/api/login`, user)
-            .pipe(tap(data => this.setUserLogged(data)));
+        return this.http.post<any>(`/api/login`, user).pipe(
+            tap(data => {
+                this.isAuthSubject.next(true);
+                localStorage.setItem(this.JWT_TOKEN, data.accessToken);
+            })
+        );
     }
 
     logout() {
-        this.setUserLogout();
-        this.router.navigate(['/']);
-    }
-
-    setUserLogged(user: any) {
-        this.userLogged = user;
-        localStorage.setItem(this.JWT_TOKEN, user.accessToken);
-    }
-
-    setUserLogout() {
-        this.userLogged = null;
+        this.isAuthSubject.next(false);
         localStorage.removeItem(this.JWT_TOKEN);
+
+        this.router.navigate(['/']);
     }
 }

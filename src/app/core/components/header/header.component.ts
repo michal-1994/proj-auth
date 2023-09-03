@@ -8,6 +8,7 @@ import { AuthService } from 'src/app/auth/services/auth.service';
 })
 export class HeaderComponent implements OnInit {
     menuVisible!: boolean;
+    isAuth: boolean = false;
 
     @HostListener('window:resize', ['$event'])
     onWindowResize() {
@@ -17,6 +18,10 @@ export class HeaderComponent implements OnInit {
     constructor(readonly authService: AuthService) {}
 
     ngOnInit(): void {
+        this.authService.isAuth$.subscribe(isAuth => {
+            this.isAuth = isAuth;
+        });
+
         this.setInitialMenuVisibility();
     }
 

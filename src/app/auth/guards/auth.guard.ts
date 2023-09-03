@@ -9,15 +9,20 @@ import { AuthService } from '../services/auth.service';
 
 @Injectable()
 export class AuthGuard {
+    isAuth: boolean = false;
+
     constructor(
         private service: AuthService,
         private router: Router
-    ) {}
+    ) {
+        this.service.isAuth$.subscribe(isAuth => {
+            this.isAuth = isAuth;
+        });
+    }
 
     canActivate(): boolean {
-        const isAuth = this.service.userLogged;
-        if (!isAuth) {
-            this.router.navigate(['/']);
+        if (!this.isAuth) {
+            this.router.navigate(['/login']);
         }
         return true;
     }
