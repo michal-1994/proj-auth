@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { BehaviorSubject, catchError, Observable, tap } from 'rxjs';
 import { User } from '../models/user.model';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
     providedIn: 'root'
@@ -16,7 +17,8 @@ export class AuthService {
 
     constructor(
         private readonly http: HttpClient,
-        private readonly router: Router
+        private readonly router: Router,
+        private readonly toastrService: ToastrService
     ) {
         this.checkAuthentication();
     }
@@ -39,6 +41,23 @@ export class AuthService {
             tap(data => {
                 this.isAuthSubject.next(true);
                 localStorage.setItem(this.JWT_TOKEN, data.accessToken);
+
+                this.toastrService.success('Successfully logged in', 'Success');
+                this.router.navigate(['app/dashboard']);
+            }),
+            catchError((e: any) => {
+                let errorMessage = 'Something went wrong';
+
+                if (e.error) {
+                    errorMessage = e.error;
+                }
+
+                if (e.status == 404) {
+                    errorMessage = 'Something went wrong';
+                }
+
+                this.toastrService.error(errorMessage, 'Error');
+                return errorMessage;
             })
         );
     }

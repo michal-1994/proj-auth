@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import {
     FormBuilder,
     FormControl,
@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Subscription } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -14,7 +15,8 @@ import { AuthService } from '../../services/auth.service';
     templateUrl: './login-form.component.html',
     styleUrls: ['./login-form.component.scss']
 })
-export class LoginFormComponent implements OnInit {
+export class LoginFormComponent implements OnInit, OnDestroy {
+    sub = new Subscription();
     loginForm!: FormGroup;
     isPasswordVisible: boolean = false;
 
@@ -47,31 +49,19 @@ export class LoginFormComponent implements OnInit {
     }
 
     login() {
-        this.service
+        this.sub = this.service
             .login({
                 email: this.f['email'].value,
                 password: this.f['password'].value
             })
-            .subscribe({
-                next: () => {
-                    this.toastr.success('Successfully logged in', 'Success');
-
-                    this.loginForm.reset();
-                    this.router.navigate(['app/dashboard']);
-                },
-                error: e => {
-                    let errorMessage = 'Something went wrong';
-
-                    if (e.error) {
-                        errorMessage = e.error;
-                    }
-
-                    this.toastr.error(errorMessage, 'Error');
-                }
-            });
+            .subscribe();
     }
 
     togglePasswordVisibility() {
         this.isPasswordVisible = !this.isPasswordVisible;
+    }
+
+    ngOnDestroy() {
+        this.sub.unsubscribe();
     }
 }
