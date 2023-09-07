@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, catchError, Observable, tap } from 'rxjs';
+import { BehaviorSubject, catchError, Observable, of, tap } from 'rxjs';
 import { User } from '../models/user.model';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -33,55 +33,70 @@ export class AuthService {
     }
 
     signup(user: User): Observable<any> {
-        return this.http.post<any>(`/api/register`, user).pipe(
-            tap(() => {
-                this.toastrService.success(
-                    'User added successfully',
-                    'Success'
-                );
-                this.router.navigate(['login']);
-            }),
-            catchError((e: any) => {
-                let errorMessage = 'Something went wrong';
+        // For github pages
+        this.toastrService.success('User added successfully', 'Success');
+        this.router.navigate(['login']);
 
-                if (e.error) {
-                    errorMessage = e.error;
-                }
+        return of(true);
 
-                if (e.status == 404) {
-                    errorMessage = 'Something went wrong';
-                }
+        // return this.http.post<any>(`/api/register`, user).pipe(
+        //     tap(() => {
+        //         this.toastrService.success(
+        //             'User added successfully',
+        //             'Success'
+        //         );
+        //         this.router.navigate(['login']);
+        //     }),
+        //     catchError((e: any) => {
+        //         let errorMessage = 'Something went wrong';
 
-                this.toastrService.error(errorMessage, 'Error');
-                return errorMessage;
-            })
-        );
+        //         if (e.error) {
+        //             errorMessage = e.error;
+        //         }
+
+        //         if (e.status == 404) {
+        //             errorMessage = 'Something went wrong';
+        //         }
+
+        //         this.toastrService.error(errorMessage, 'Error');
+        //         return errorMessage;
+        //     })
+        // );
     }
 
     login(user: User): Observable<any> {
-        return this.http.post<any>(`/api/login`, user).pipe(
-            tap(data => {
-                this.isAuthSubject.next(true);
-                localStorage.setItem(this.JWT_TOKEN, data.accessToken);
+        // For github pages
+        this.isAuthSubject.next(true);
+        localStorage.setItem(this.JWT_TOKEN, this.JWT_TOKEN);
 
-                this.toastrService.success('Successfully logged in', 'Success');
-                this.router.navigate(['app/dashboard']);
-            }),
-            catchError((e: any) => {
-                let errorMessage = 'Something went wrong';
+        this.toastrService.success('Successfully logged in', 'Success');
+        this.router.navigate(['app/dashboard']);
 
-                if (e.error) {
-                    errorMessage = e.error;
-                }
+        return of(true);
 
-                if (e.status == 404) {
-                    errorMessage = 'Something went wrong';
-                }
+        // return this.http.post<any>(`/api/login`, user).pipe(
+        //     tap(data => {
+        //         this.isAuthSubject.next(true);
+        //         localStorage.setItem(this.JWT_TOKEN, data.accessToken);
 
-                this.toastrService.error(errorMessage, 'Error');
-                return errorMessage;
-            })
-        );
+        //         this.toastrService.success('Successfully logged in', 'Success');
+        //         this.router.navigate(['app/dashboard']);
+        //     }),
+        //     catchError((e: any) => {
+        //         let errorMessage = 'Something went wrong';
+
+        //         if (e.error) {
+        //             errorMessage = e.error;
+        //         }
+
+        //         if (e.status == 404) {
+        //             errorMessage = 'Something went wrong';
+        //         }
+
+        //         this.toastrService.error(errorMessage, 'Error');
+        //         return errorMessage;
+        //     })
+        // );
     }
 
     logout() {
