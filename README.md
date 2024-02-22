@@ -1,59 +1,53 @@
-# ProjAuth
+# <div align="center">Auth</div>
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.1.
+<div align="center">
+  <img src="/src/favicon.ico" alt="Ico" title="Ico" style="height: 100px;">
+</div>
 
-## Development server
+1. [Introdution](#introdution)
+2. [Setup](#setup)
+3. [Technologies](#technologies)
+4. [Testing](#testing)
+5. [Deployment](#deployment)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Introdution
 
-## Code scaffolding
+The Authentication Module is an integral part of the larger application, providing secure and streamlined user authentication features. This module includes functionalities such as user login, registration, and logout.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Key Features
 
-## Build
+-  User Login.
+-  User Registration.
+-  Logout.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Setup
 
-## Running unit tests
+To get started with the Auth App, follow these simple steps:
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
-
-## Configuration api (only for testing)
-
-Add file `/proxy.conf.json`
-
-```
-{
-    "/api": {
-        "target": "http://localhost:3000"
-    }
-}
+```bash
+git clone https://github.com/michal-1994/proj-auth.git
+cd proj-auth
+npm install
+npm run start
 ```
 
-Add file `/api/db.json`
+## Technologies
 
-```
-{
-    "users": []
-}
-```
+-   **Angular** A powerful framework for building dynamic web applications.
+-   **Tailwind CSS** A utility-first CSS framework for building modern and responsive user interfaces.
 
-Add file `/api/routes.json`
+## Testing
 
-```
-{
-    "/api/*": "/$1"
-}
+To run tests and ensure the reliability of the application, use the following command:
+
+```bash
+npm run test
 ```
 
-## Api server (only for testing)
+## Deployment
 
-Run `npm run api` for a api server. Navigate to `http://localhost:3000/`. You need to restart the application to reload if you change any of the source files.
+To deploy the Auth App, use the following command:
+
+```bash
+npm run deploy
+```
